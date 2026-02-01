@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentýnka ❤️</title>
+    <title>Top secret</title>
     <style>
         body {
             margin: 0;
@@ -75,13 +75,6 @@
             color: #ff4d6d;
             font-size: 5rem;
         }
-        
-        .valentine-gif {
-            max-width: 100%; /* Aby se GIF vešel do boxu */
-            height: auto;
-            margin-top: 20px;
-            border-radius: 10px; /* Jemné zaoblení */
-        }
     </style>
 </head>
 <body>
@@ -97,9 +90,7 @@
 
         <div id="success-section" class="success-message">
             <div class="heart">❤️</div>
-            <h1>Věděl jsem to! Děkuji!</h1>
-            <p>Bude to nejlepší Valentýn!</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3czYW9pMGk0YXA4dm1tZWhzNzRjaG8wZXZ4cnJwdWl4dGFja3l2MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/k3gS6iJjT1tGkZ0M/giphy.gif" alt="Valentines GIF" class="valentine-gif">
+            <h1>Věděl jsem to!</h1>
         </div>
     </div>
 
@@ -109,24 +100,30 @@
         const questionSection = document.getElementById('question-section');
         const successSection = document.getElementById('success-section');
 
+        // Funkce pro náhodný pohyb tlačítka NE
         const moveButton = () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40); // -40 pro okraje
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40); // -40 pro okraje
+            // Vypočítáme náhodné souřadnice v rámci okna prohlížeče
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
         };
 
+        // Událost při najetí myší (pro PC)
         noBtn.addEventListener('mouseover', moveButton);
+        
+        // Událost při kliknutí/dotyku (pro mobily)
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); 
+            e.preventDefault(); // Zabrání kliknutí
             moveButton();
         });
 
+        // Funkce po kliknutí na ANO
         function celebrate() {
             questionSection.style.display = 'none';
             successSection.style.display = 'block';
-            document.body.style.backgroundColor = '#ffc8dd'; // Změna barvy pozadí
+            document.body.style.backgroundColor = '#ffc8dd';
         }
     </script>
 </body>
