@@ -3,48 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Můj web na GitHubu</title>
+    <title>Valentýnka ❤️</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
             margin: 0;
+            height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #f0f2f5;
-            color: #333;
+            background-color: #ffeef2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
         }
-        .container {
+
+        #main-card {
             text-align: center;
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            max-width: 500px;
-        }
-        h1 { color: #2ecc71; }
-        p { font-size: 1.1rem; }
-        .status {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 5px 15px;
-            background: #e8f5e9;
-            color: #2e7d32;
+            padding: 3rem;
             border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
             font-weight: bold;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #ff758f;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: absolute; /* Důležité pro utíkání */
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+        }
+
+        .heart {
+            color: #ff4d6d;
+            font-size: 5rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Ahoj! 🚀</h1>
-        <p>Tohle je můj první web hostovaný na <strong>GitHub Pages</strong>.</p>
-        <div class="status">Web je online</div>
-        <p>Právě teď se učím, jak funguje deployment.</p>
+    <div id="main-card">
+        <div id="question-section">
+            <h1>Budeš moje Valentýnka? ❤️</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">ANO</button>
+                <button id="noBtn">NE</button>
+            </div>
+        </div>
+
+        <div id="success-section" class="success-message">
+            <div class="heart">❤️</div>
+            <h1>Věděl jsem to! Děkuji!</h1>
+            <p>Bude to nejlepší Valentýn!</p>
+        </div>
     </div>
 
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const questionSection = document.getElementById('question-section');
+        const successSection = document.getElementById('success-section');
+
+        // Funkce pro náhodný pohyb tlačítka NE
+        const moveButton = () => {
+            // Vypočítáme náhodné souřadnice v rámci okna prohlížeče
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        };
+
+        // Událost při najetí myší (pro PC)
+        noBtn.addEventListener('mouseover', moveButton);
+        
+        // Událost při kliknutí/dotyku (pro mobily)
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Zabrání kliknutí
+            moveButton();
+        });
+
+        // Funkce po kliknutí na ANO
+        function celebrate() {
+            questionSection.style.display = 'none';
+            successSection.style.display = 'block';
+            document.body.style.backgroundColor = '#ffc8dd';
+        }
+    </script>
 </body>
 </html>
